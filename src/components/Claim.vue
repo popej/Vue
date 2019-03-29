@@ -22,13 +22,32 @@ export default {
   align-items: center;
   text-align: center;
 }
+
 .claim {
-  font-size: 50px;
+  font-size: 35px;
   margin: 0;
+
+  @media (min-width: 768px) {
+    font-size: 80px;
+  }
+
+  @media (min-width: 1024px) {
+    font-size: 100px;
+  }
 }
 
 .subclaim {
   margin: 20px 0 0;
   font-size: 13px;
+  min-width: 300px;
+
+  @media (min-width: 768px) {
+    font-size: 23px;
+    padding: 0 50px;
+    letter-spacing: 1px;
+  }
+  @media (min-width: 1024px) {
+    width: 770px;
+  }
 }
 </style>
