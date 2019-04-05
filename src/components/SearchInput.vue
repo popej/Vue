@@ -42,7 +42,7 @@ input {
 
   &:focus {
     outline: none;
-    box-shadow: 0 10px 20px -8px rgba(255, 255, 255, 0.5);
+    box-shadow: 0 10px 10px -8px rgba(255, 255, 255, 0.5);
   }
 }
 

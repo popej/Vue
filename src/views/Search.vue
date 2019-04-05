@@ -9,6 +9,9 @@
     </transition>
     <Claim v-if="step === 0"/>
     <SearchInput v-model="searchValue" @input="handleInput" :dark="step === 1"/>
+    <div class="results" v-if="results && !loading && step === 1">
+      <Item v-for="item in results" :item="item" :key="item.data[0].nasa_id"/>
+    </div>
   </div>
 </template>
 
@@ -18,6 +21,7 @@ import debounce from "lodash.debounce";
 import Claim from "@/components/Claim";
 import SearchInput from "@/components/SearchInput";
 import HeroImage from "@/components/HeroImage";
+import Item from "@/components/Item";
 
 const API = "https://images-api.nasa.gov/search";
 
@@ -26,7 +30,8 @@ export default {
   components: {
     Claim,
     SearchInput,
-    HeroImage
+    HeroImage,
+    Item,
   },
   data() {
     return {
@@ -57,7 +62,7 @@ export default {
 <style lang="scss" scoped>
 .fade-enter-active,
 .fade-leave-active {
-  transition: opacity .5s ease;
+  transition: opacity 0.5s ease;
 }
 .fade-enter,
 .fade-leave {
@@ -66,7 +71,7 @@ export default {
 
 .slide-enter-active,
 .slide-leave-active {
-  transition: margin-top .5s ease;
+  transition: margin-top 0.5s ease;
 }
 .slide-enter,
 .slide-leave {
@@ -94,6 +99,18 @@ export default {
 
   &.flexStart {
     justify-content: flex-start;
+  }
+}
+
+
+.results {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  grid-gap: 20px;
+  margin-top: 50px;
+
+  @media (min-width: 768px) {
+    grid-template-columns: 1fr 1fr 1fr;
   }
 }
 </style>
