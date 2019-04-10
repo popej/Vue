@@ -1,6 +1,13 @@
 
 <template>
-  <input id="search" name="search" :value="value" :class="{ dark }" @input="handleChange" autocomplete="off"/>
+  <input
+    id="search"
+    name="search"
+    :value="value"
+    :class="{ dark }"
+    @input="handleChange"
+    autocomplete="off"
+  >
 </template>
 
 <script>
@@ -12,15 +19,15 @@ export default {
       required: true
     },
     dark: {
-        type: Boolean,
-        default: false
+      type: Boolean,
+      default: false
     }
   },
   methods: {
-      handleChange(e) {
-          this.$emit('input', e.target.value);
-      }
-  },
+    handleChange(e) {
+      this.$emit("input", e.target.value);
+    }
+  }
 };
 </script>
 <style lang="scss" scoped>
@@ -47,11 +54,11 @@ input {
 }
 
 .dark {
-    color: #1e3d4a;
-    border-bottom-color: #1e3d4a;
+  color: #1e3d4a;
+  border-bottom-color: #1e3d4a;
 
-    &:focus {
-        box-shadow: 0 10px 20px -8px rgba(255, 255, 255, .5)
-    }
+  &:focus {
+    box-shadow: 0 10px 20px -8px rgba(255, 255, 255, 0.5);
+  }
 }
 </style>

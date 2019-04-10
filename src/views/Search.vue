@@ -10,8 +10,14 @@
     <Claim v-if="step === 0"/>
     <SearchInput v-model="searchValue" @input="handleInput" :dark="step === 1"/>
     <div class="results" v-if="results && !loading && step === 1">
-      <Item v-for="item in results" :item="item" :key="item.data[0].nasa_id"/>
+      <Item
+        v-for="item in results"
+        :item="item"
+        :key="item.data[0].nasa_id"
+        @click.native="handleModalOpen(item)"
+      />
     </div>
+    <Modal v-if="modalOpen" :item="modalItem" @closeModal="modalOpen = false"/>
   </div>
 </template>
 
@@ -22,6 +28,7 @@ import Claim from "@/components/Claim";
 import SearchInput from "@/components/SearchInput";
 import HeroImage from "@/components/HeroImage";
 import Item from "@/components/Item";
+import Modal from "@/components/Modal";
 
 const API = "https://images-api.nasa.gov/search";
 
@@ -32,9 +39,12 @@ export default {
     SearchInput,
     HeroImage,
     Item,
+    Modal
   },
   data() {
     return {
+      modalOpen: false,
+      modalItem: null,
       loading: false,
       step: 0,
       searchValue: "",
@@ -42,6 +52,11 @@ export default {
     };
   },
   methods: {
+    handleModalOpen(item) {
+      this.modalOpen = true;
+      this.modalItem = item;
+    },
+
     handleInput: debounce(function() {
       console.log(this.searchValue);
       axios
@@ -83,6 +98,10 @@ export default {
   width: 15vw;
   top: 30px;
   left: 30px;
+
+  @media (min-width: 768px) {
+    width: 7vw;
+  }
 }
 
 .wrapper {
@@ -102,7 +121,6 @@ export default {
   }
 }
 
-
 .results {
   display: grid;
   grid-template-columns: 1fr 1fr;
@@ -110,6 +128,7 @@ export default {
   margin-top: 50px;
 
   @media (min-width: 768px) {
+    width: 90%;
     grid-template-columns: 1fr 1fr 1fr;
   }
 }
